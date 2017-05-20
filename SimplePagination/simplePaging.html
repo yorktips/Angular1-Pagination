@@ -9,17 +9,16 @@
 	<script src="../bootstrap.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="../ng-table.min.css">
 	<script src="../ng-table.min.js"></script>
-   
 
 	</head>
 <body  >
 <div ng-app="myApp">
-  <div ng-controller="demoController">
+  <div ng-controller="demoController as demo">
     <table ng-table="tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
       <tr ng-repeat="row in $data">
-        <td data-title="'age'" filter="{ age: 'number'}" sortable="'age'">{{row.age}}</td>
-        <td data-title="'name'" filter="{ name: 'text'}" sortable="'name'">{{row.name}}</td>
-        <td data-title="'location'" filter="{ location: 'text'}" sortable="'location'">{{row.location}}</td>
+        <td data-title="'age'" filter="{ age: 'text'}" sortable="'age'">{{row.age}}</td>
+        <td data-title="'name'" filter="{ name: 'select'}" filter-data="demo.names" sortable="'name'">{{row.name}}</td>
+        <td data-title="'location'" filter="{ location: 'select'}" filter-data="locations" sortable="'location'">{{row.location}}</td>
       </tr>
     </table>
   </div>
@@ -27,6 +26,22 @@
 <script type="text/javascript">
 var app = angular.module("myApp", ["ngTable"]);
 app.controller("demoController", function ($scope, $filter, ngTableParams) {
+	this.names=[
+	    {id:'',title:''},
+	    {id:'Madhav Sai',title:'Madhav Sai'},
+		{id:'Rohini Alavala',title:'Rohini Alavala'},
+		{id:'Siva Prasad',title:'Siva Prasad'}
+	];
+	$scope.locations=[
+	    {id:'',title:''},
+	    {id:'Nagpur',title:'Nagpur'},
+		{id:'Chennai',title:'Chennai'},
+		{id:'Bangalore',title:'Bangalore'},
+		{id:'Vizag',title:'Vizag'},
+		{id:'Kakinada',title:'Kakinada'},
+		{id:'California',title:'California'}
+	];
+
 	$scope.users = [
 		{ name: "Madhav Sai", age: 10, location: 'Nagpur' },
 		{ name: "Suresh Dasari", age: 30, location: 'Chennai' },
